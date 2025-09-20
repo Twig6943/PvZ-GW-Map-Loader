@@ -12,6 +12,7 @@ void Menu::sendLoadLevelMessage() {
     // TODO: validity checks or do away with letting the user supply their own input
     setup.setLevelName(m_levelInputText);
     setup.setInclusionOptions(m_inclusionOptionsInputText);
+    setup.DifficultyIndex = fbutil::GameDifficulty_Multiplayer;
 
     using tSendLoadLevelMessage = void(*)(fb::LevelSetup*, bool, bool, bool);
     auto pSendLoadLevelMessage = reinterpret_cast<tSendLoadLevelMessage>(offsets::g_sendServerLoadLevelMessage);
