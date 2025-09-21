@@ -22,11 +22,13 @@ file(GLOB_RECURSE PROJECT_SOURCES_CXX
     ${CMAKE_SOURCE_DIR}/Source/*.c
 )
 
+# ThirdParty header files
 file(GLOB_RECURSE THIRDPARTY_SOURCES_HH
     ${CMAKE_SOURCE_DIR}/ThirdParty/*.hpp
     ${CMAKE_SOURCE_DIR}/ThirdParty/*.h
 )
 
+# ThirdParty source files
 file(GLOB_RECURSE THIRDPARTY_SOURCES_CXX
     ${CMAKE_SOURCE_DIR}/ThirdParty/*.cpp
     ${CMAKE_SOURCE_DIR}/ThirdParty/*.c
@@ -53,4 +55,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 # Include this bit to export our proxy function as DirectInput8Create
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     "${CMAKE_SOURCE_DIR}/Source/DllProxy.def"
+)
+
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        "$<TARGET_FILE:${CMAKE_PROJECT_NAME}>"
+        "$<TARGET_FILE_DIR:${CMAKE_PROJECT_NAME}>/dinput8.dll"
 )
