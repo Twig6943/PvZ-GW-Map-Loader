@@ -22,11 +22,35 @@ struct LevelDescriptionInclusionCategory {
 class LevelDescriptionAsset : public Asset {
 public:
     String& getLevelName() { return m_levelName; }
+    Array<LevelDescriptionInclusionCategory>& getCategories() { return m_categories; }
+
+    LevelDescriptionInclusionCategory* getCategory(const char* category);
+    bool hasCategory(const char* category);
 
 private:
-    String m_levelName;
-    Array<LevelDescriptionInclusionCategory> m_categories;
+    /* 0x18 */ String m_levelName;
+    /* 0x20 */ Array<LevelDescriptionInclusionCategory> m_categories;
 
+};
+
+class LevelReportingAsset : public Asset {
+public:
+    RefArray<class LevelDescriptionAsset>& getBuiltLevels() {
+        return m_builtLevels;
+    }
+
+    class LevelDescriptionAsset* getLevelDescription(const char* level) {
+        for (auto* desc : m_builtLevels) {
+            if (strcmp(level, desc->getLevelName().asCString()) == 0) {
+                return desc;
+            }
+        }
+
+        return nullptr;
+    }
+
+private:
+    RefArray<class LevelDescriptionAsset> m_builtLevels;
 };
 
 } // namespace fb

@@ -54,6 +54,14 @@ class RefArray {
 public:
     const s32 size() { return *reinterpret_cast<s32*>((reinterpret_cast<char*>(m_data) - 0x04)); }
 
+    T* operator[](size_t index) { return m_data[index]; }
+    const T* operator[](size_t index) const { return m_data[index]; }
+    
+    T** begin() { return m_data; }
+    T** end() { return m_data + size(); }
+    const T** begin() const { return m_data; }
+    const T** end() const { return m_data + size(); }
+
 private:
     /* 0x00 */ T** m_data;
 
