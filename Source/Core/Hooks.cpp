@@ -1,5 +1,6 @@
 #include <Core/Hooks.hpp>
 
+#include <Core/Application.hpp>
 #include <Core/Memory.hpp>
 #include <MinHook.h>
 #include <SDK/Math.hpp>
@@ -11,7 +12,9 @@ using tHalfExtentHook = void(*)(void*, void*, void*, void*, fb::Vec4*, fb::Matri
 tHalfExtentHook oHalfExtentHook;
 
 void halfExtentHook(void* param_1, void* param_2, void* param_3, void* param_4, fb::Vec4* halfExtentData, fb::Matrix4x4* transform) {
-    halfExtentData->zero();
+    if (Application::getApp().getSettings().FreedomEnabled) {
+        halfExtentData->zero();
+    }
 
     return oHalfExtentHook(param_1, param_2, param_3, param_4, halfExtentData, transform);
 }
@@ -20,7 +23,9 @@ using tUpdatePreRoundHook = void(*)(fb::ServerPVZPreRoundEntity*);
 tUpdatePreRoundHook oUpdatePreRoundHook;
 
 void updatePreRoundHook(fb::ServerPVZPreRoundEntity* thisp) {
-    thisp->getData()->setRequiresOnePlayer();
+    if (Application::getApp().getSettings().LowerPreRoundRequirement) {
+        thisp->getData()->setRequiresOnePlayer();
+    }
 
     return oUpdatePreRoundHook(thisp);
 }

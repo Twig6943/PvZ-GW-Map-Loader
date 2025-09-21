@@ -6,6 +6,8 @@
 
 #include <imgui.h>
 
+#include <Core/Application.hpp>
+
 void Menu::sendLoadLevelMessage() {
     fb::LevelSetup& setup = fb::GameContext::getInstance()->getLevel()->getLevelSetup();
 
@@ -30,6 +32,10 @@ void Menu::drawMenu() {
             sendLoadLevelMessage();
         }
     }
+
+    ImGui::Checkbox("Freedom", &Application::getApp().getSettings().FreedomEnabled);
+    ImGui::SameLine();
+    ImGui::Checkbox("Lower Pre-Round Requirement", &Application::getApp().getSettings().LowerPreRoundRequirement);
     
     ImGui::End();
 }

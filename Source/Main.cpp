@@ -5,10 +5,10 @@
 #include <Core/Application.hpp>
 
 DWORD WINAPI hackThread(LPVOID hInstance) {
-    g_application = std::make_unique<Application>();
-    g_application->initialize();
-    g_application->run();
-    g_application->uninitialize();
+    Application& app = Application::getApp();
+    app.initialize();
+    app.run();
+    app.uninitialize();
 
     FreeLibraryAndExitThread(reinterpret_cast<HINSTANCE>(hInstance), 0);
 }
