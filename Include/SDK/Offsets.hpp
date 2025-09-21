@@ -19,5 +19,6 @@ DEFINE_OFFSET(dxRendererInstance, 0x141FEB230);
 DEFINE_OFFSET(clientGameContextInstance, 0x141F000E0);
 DEFINE_OFFSET(serverGameContextInstance, 0x141FC3180);
 DEFINE_OFFSET(clientCtor, 0x140538050);
+DEFINE_OFFSET(serverPlayerUpdateInactivity, 0x140C00470);
 
 }

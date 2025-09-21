@@ -50,6 +50,10 @@
         "xmemory": "cpp",
         "xtr1common": "cpp",
         "span": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "list": "cpp",
+        "unordered_map": "cpp",
+        "vector": "cpp",
+        "xhash": "cpp"
     }
 }

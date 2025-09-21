@@ -5,7 +5,7 @@
 
 namespace fb {
 
-static void* getHwnd() {
+static inline void* getHwnd() {
     return *reinterpret_cast<void**>(0x141C28E08);
 }
 

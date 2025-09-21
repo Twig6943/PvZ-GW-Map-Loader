@@ -3,6 +3,7 @@
 struct ApplicationSettings {
     bool FreedomEnabled = false;
     bool LowerPreRoundRequirement = false;
+    bool DisableIdleKick = false;
 };
 
 class Application {
