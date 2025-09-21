@@ -6,6 +6,7 @@ Level loader for Plants vs. Zombies: Garden Warfare on PC.
 * If you want to use this offline, you can inject it after loading into a level with "-level" and "-Game.DefaultLayerInclusion" launch options.
 * If you want to play with friends or be connected to EA servers, you must be the host and not in the main menu for this to work. 
 * Select options within the boxes based on the level you want to load, then press "Load Level".
+* Use the INSERT key to toggle GUI visibility.
 
 # Credits
 PvZ-GW-Map-Loader utilizes the following open source projects:

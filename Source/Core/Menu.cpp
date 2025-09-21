@@ -45,7 +45,6 @@ void Menu::sendLoadLevelMessage() {
 
     fb::LevelSetup& setup = fb::GameContext::getInstance()->getLevel()->getLevelSetup();
 
-    // TODO: validity checks or do away with letting the user supply their own input
     setup.setLevelName(m_selectedLevel);
 
     std::stringstream inclusionOptionsStream;
@@ -130,6 +129,7 @@ void Menu::drawMenu() {
     // "Fix" until I figure out how to allow for level loading in the front end.
     if (fbutil::isLocalPlayerInFrontEnd() || !fbutil::isLocalPlayerServerHost()) {
         ImGui::Text("Level loading is not supported in the Main Menu.");
+        ImGui::Text("Press INSERT to toggle UI visiblity.");
         ImGui::End();
         return;
     }
@@ -184,5 +184,7 @@ void Menu::drawMenu() {
         }
     }
     
+    ImGui::Text("Press INSERT to toggle UI visiblity.");
+
     ImGui::End();
 }
