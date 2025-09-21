@@ -10,7 +10,6 @@ void Application::initialize() {
     SetConsoleTitleA(s_consoleTitle);
 
     Hooks::installHooks();
-    Renderer::getInstance().initialize();
 }
 
 void Application::uninitialize() {

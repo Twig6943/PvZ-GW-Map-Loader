@@ -1,6 +1,7 @@
 #include <Core/Hooks.hpp>
 
 #include <Core/Application.hpp>
+#include <Core/Renderer.hpp>
 #include <Core/Memory.hpp>
 #include <MinHook.h>
 #include <SDK/Math.hpp>
@@ -30,6 +31,14 @@ void updatePreRoundHook(fb::ServerPVZPreRoundEntity* thisp) {
     return oUpdatePreRoundHook(thisp);
 }
 
+using tClientCtorHook = void(*)(void*, void*);
+tClientCtorHook oClientCtorHook;
+void clientCtorHook(void* thisp, void* param_2) {
+    oClientCtorHook(thisp, param_2);
+
+    Renderer::getInstance().initialize();
+}
+
 void Hooks::installHooks() {
     // Update combat area patch
     Memory::patch(offsets::g_serverCombatAreaEntityUpdate, std::span<const u8> {
@@ -47,6 +56,9 @@ void Hooks::installHooks() {
 
     MH_CreateHook(reinterpret_cast<LPVOID>(offsets::g_preroundUpdate), updatePreRoundHook, reinterpret_cast<LPVOID*>(&oUpdatePreRoundHook));
     MH_EnableHook(reinterpret_cast<LPVOID>(offsets::g_preroundUpdate));
+
+    MH_CreateHook(reinterpret_cast<LPVOID>(offsets::g_clientCtor), clientCtorHook, reinterpret_cast<LPVOID*>(&oClientCtorHook));
+    MH_EnableHook(reinterpret_cast<LPVOID>(offsets::g_clientCtor));
 }
 
 void Hooks::uninstallHooks() {

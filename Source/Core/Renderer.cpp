@@ -62,22 +62,13 @@ LRESULT windowProcedure(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 void Renderer::initialize() {
     fb::DxRenderer* dxRenderer = fb::DxRenderer::getInstance();
-    if (!dxRenderer) [[unlikely]] {
-        util::fatalErrorMessage("DirectX11 renderer was not initialized.");
-    }
 
     m_device = dxRenderer->getDevice();
     m_deviceContext = dxRenderer->getDeviceContext();
     
     fb::Screen* screen = dxRenderer->getScreen();
-    if (!screen) [[unlikely]] {
-        util::fatalErrorMessage("Renderer screen was not initialized.");
-    }
 
     m_swapChain = screen->getSwapChain();
-    if (!m_swapChain) [[unlikely]] {
-        util::fatalErrorMessage("IDXGISwapChain was not initialized.");
-    }
 
     populateDxgiFunctionPointers();
     s_menu = new Menu();
