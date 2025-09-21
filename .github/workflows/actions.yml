@@ -44,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: DLL
-          path: D:/a/PvZ-GW-Map-Loader/build/
+          path: D:\a\PvZ-GW-Map-Loader\PvZ-GW-Map-Loader\build\Release\
